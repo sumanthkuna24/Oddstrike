@@ -26,7 +26,7 @@ const io = new Server(server, {
   cors: {
     origin: [
       "http://localhost:5173",
-      "https://oddstrike-e2f8ebjqf-sumanths-projects-41cf0c.vercel.app"
+      "https://oddstrike.vercel.app"
     ],
     methods: ["GET", "POST"],
     credentials: true
