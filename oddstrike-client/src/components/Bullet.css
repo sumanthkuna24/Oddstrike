@@ -1,0 +1,57 @@
+.bullet-trajectory {
+  position: fixed;
+  top: var(--from-y);
+  left: var(--from-x);
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  z-index: 2000;
+  animation: bulletTravel 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  transform: translate(-50%, -50%);
+}
+
+.bullet {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  background: radial-gradient(circle, #fbbf24, #f97316, #ea580c);
+  border-radius: 50%;
+  box-shadow: 0 0 15px rgba(251, 191, 36, 1), 0 0 25px rgba(249, 115, 22, 0.9);
+  animation: bulletSpin 0.6s linear infinite;
+  transform: translate(-50%, -50%);
+}
+
+.bullet-trail {
+  position: absolute;
+  width: 6px;
+  height: 60px;
+  background: linear-gradient(to bottom, rgba(251, 191, 36, 0.9), rgba(249, 115, 22, 0.5), transparent);
+  transform-origin: top center;
+  transform: translate(-50%, -50%) rotate(var(--trail-angle, 0deg));
+  animation: trailFade 0.6s ease-out forwards;
+  border-radius: 3px;
+}
+
+@keyframes bulletTravel {
+  0% {
+    top: var(--from-y);
+    left: var(--from-x);
+    opacity: 1;
+  }
+  100% {
+    top: var(--to-y);
+    left: var(--to-x);
+    opacity: 0.8;
+  }
+}
+
+@keyframes bulletSpin {
+  0% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
+  50% { transform: translate(-50%, -50%) rotate(180deg) scale(1.2); }
+  100% { transform: translate(-50%, -50%) rotate(360deg) scale(1); }
+}
+
+@keyframes trailFade {
+  0% { opacity: 1; height: 60px; }
+  100% { opacity: 0; height: 120px; }
+}

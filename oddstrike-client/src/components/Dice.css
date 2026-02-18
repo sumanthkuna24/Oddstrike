@@ -1,0 +1,95 @@
+.dice {
+  width: 60px;
+  height: 60px;
+  perspective: 1000px;
+}
+
+.dice-face {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #ffffff, #f1f5f9);
+  border-radius: 12px;
+  border: 3px solid #1e293b;
+  box-shadow: 
+    0 4px 8px rgba(0, 0, 0, 0.3),
+    inset 0 2px 4px rgba(255, 255, 255, 0.8);
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  padding: 8px;
+  animation: diceRoll 0.6s ease-out;
+}
+
+.dice-joker .dice-face {
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  border-color: #92400e;
+}
+
+.joker-face {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.joker-icon {
+  font-size: 32px;
+  animation: jokerSpin 0.6s ease-out;
+}
+
+.dice-dot {
+  width: 10px;
+  height: 10px;
+  background: #1e293b;
+  border-radius: 50%;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.dice-dot.top-left {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.dice-dot.top-right {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+.dice-dot.center {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.dice-dot.bottom-left {
+  grid-column: 1;
+  grid-row: 3;
+}
+
+.dice-dot.bottom-right {
+  grid-column: 3;
+  grid-row: 3;
+}
+
+@keyframes diceRoll {
+  0% {
+    transform: rotateX(0deg) rotateY(0deg);
+  }
+  25% {
+    transform: rotateX(90deg) rotateY(90deg);
+  }
+  50% {
+    transform: rotateX(180deg) rotateY(180deg);
+  }
+  75% {
+    transform: rotateX(270deg) rotateY(270deg);
+  }
+  100% {
+    transform: rotateX(360deg) rotateY(360deg);
+  }
+}
+
+@keyframes jokerSpin {
+  0% { transform: rotate(0deg) scale(0.5); opacity: 0; }
+  50% { transform: rotate(180deg) scale(1.2); }
+  100% { transform: rotate(360deg) scale(1); opacity: 1; }
+}

@@ -1,0 +1,718 @@
+/* ========================= */
+/* CHARACTER BASE */
+/* ========================= */
+
+.character {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transform-origin: center bottom;
+}
+
+.character-head,
+.character-body {
+  pointer-events: none;
+}
+
+/* ========================= */
+/* STATE 1 - HEAD ONLY */
+/* ========================= */
+
+.character-state-1 {
+  animation: headFloat 2s ease-in-out infinite;
+}
+
+.character-state-1 .character-head {
+  width: 50%;
+  height: 50%;
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  border-radius: 50%;
+  position: relative;
+  box-shadow: 0 4px 8px rgba(251, 191, 36, 0.3);
+  border: 2px solid rgba(251, 191, 36, 0.5);
+}
+
+.character-state-1 .head-face {
+  position: absolute;
+  inset: 20%;
+}
+
+.character-state-1 .eye {
+  width: 8px;
+  height: 8px;
+  background: #1f2937;
+  border-radius: 50%;
+  position: absolute;
+  top: 30%;
+}
+
+.character-state-1 .left-eye {
+  left: 25%;
+}
+
+.character-state-1 .right-eye {
+  right: 25%;
+}
+
+.character-state-1 .mouth {
+  width: 12px;
+  height: 6px;
+  border: 2px solid #1f2937;
+  border-top: none;
+  border-radius: 0 0 12px 12px;
+  position: absolute;
+  bottom: 25%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+@keyframes headFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-3px); }
+}
+
+/* ========================= */
+/* STATE 2 - HEAD + BODY */
+/* ========================= */
+
+.character-state-2 {
+  animation: bodyMove 2.5s ease-in-out infinite;
+}
+
+.character-state-2 .character-head {
+  width: 45%;
+  height: 40%;
+  background: linear-gradient(135deg, #60a5fa, #3b82f6);
+  border-radius: 50%;
+  position: relative;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+  border: 2px solid rgba(59, 130, 246, 0.6);
+  z-index: 2;
+  animation: headPulse 2s ease-in-out infinite;
+}
+
+.character-state-2 .character-body {
+  width: 55%;
+  height: 50%;
+  position: relative;
+  margin-top: -5%;
+  z-index: 1;
+}
+
+.character-state-2 .body-torso {
+  width: 100%;
+  height: 70%;
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.4);
+  border: 2px solid rgba(99, 102, 241, 0.6);
+}
+
+.character-state-2 .body-arm {
+  width: 25%;
+  height: 50%;
+  background: linear-gradient(135deg, #6366f1, #818cf8);
+  border-radius: 4px;
+  position: absolute;
+  top: 10%;
+  box-shadow: 0 2px 6px rgba(99, 102, 241, 0.3);
+}
+
+.character-state-2 .left-arm {
+  left: -15%;
+  transform-origin: top right;
+  animation: armSwingLeft 2.5s ease-in-out infinite;
+}
+
+.character-state-2 .right-arm {
+  right: -15%;
+  transform-origin: top left;
+  animation: armSwingRight 2.5s ease-in-out infinite;
+}
+
+.character-state-2 .head-face {
+  position: absolute;
+  inset: 20%;
+}
+
+.character-state-2 .eye {
+  width: 6px;
+  height: 6px;
+  background: #ffffff;
+  border-radius: 50%;
+  position: absolute;
+  top: 30%;
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.8);
+}
+
+.character-state-2 .left-eye {
+  left: 25%;
+}
+
+.character-state-2 .right-eye {
+  right: 25%;
+}
+
+.character-state-2 .mouth {
+  width: 10px;
+  height: 5px;
+  border: 2px solid #ffffff;
+  border-top: none;
+  border-radius: 0 0 10px 10px;
+  position: absolute;
+  bottom: 25%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+@keyframes bodyMove {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  25% { transform: translateY(-2px) rotate(-1deg); }
+  75% { transform: translateY(-2px) rotate(1deg); }
+}
+
+@keyframes headPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes armSwingLeft {
+  0%, 100% { transform: rotate(-5deg); }
+  50% { transform: rotate(5deg); }
+}
+
+@keyframes armSwingRight {
+  0%, 100% { transform: rotate(5deg); }
+  50% { transform: rotate(-5deg); }
+}
+
+/* ========================= */
+/* STATE 3 - HEAD + BODY + GUN */
+/* ========================= */
+
+.character-state-3 {
+  animation: gunIdle 2s ease-in-out infinite;
+}
+
+.character-state-3 .character-head {
+  width: 45%;
+  height: 40%;
+  background: linear-gradient(135deg, #a78bfa, #8b5cf6);
+  border-radius: 50%;
+  position: relative;
+  box-shadow: 0 4px 16px rgba(139, 92, 246, 0.5);
+  border: 2px solid rgba(167, 139, 250, 0.7);
+  z-index: 2;
+  animation: headGlow 1.5s ease-in-out infinite;
+}
+
+.character-state-3 .character-body {
+  width: 55%;
+  height: 50%;
+  position: relative;
+  margin-top: -5%;
+  z-index: 1;
+}
+
+.character-state-3 .body-torso {
+  width: 100%;
+  height: 70%;
+  background: linear-gradient(135deg, #7c3aed, #9333ea);
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(124, 58, 237, 0.5);
+  border: 2px solid rgba(147, 51, 234, 0.7);
+  animation: torsoPulse 2s ease-in-out infinite;
+}
+
+.character-state-3 .body-arm {
+  width: 25%;
+  height: 50%;
+  background: linear-gradient(135deg, #9333ea, #a855f7);
+  border-radius: 4px;
+  position: absolute;
+  top: 10%;
+  box-shadow: 0 2px 8px rgba(147, 51, 234, 0.4);
+}
+
+.character-state-3 .left-arm {
+  left: -15%;
+  transform-origin: top right;
+  animation: armHoldLeft 2s ease-in-out infinite;
+}
+
+.character-state-3 .right-arm {
+  right: -15%;
+  transform-origin: top left;
+  animation: armHoldRight 2s ease-in-out infinite;
+}
+
+.character-state-3 .character-gun {
+  position: absolute;
+  right: -10%;
+  top: 28%;
+  width: 70%;
+  height: 26%;
+  z-index: 3;
+  animation: gunAim 2s ease-in-out infinite;
+}
+
+.character-state-3 .gun-barrel {
+  width: 70%;
+  height: 46%;
+  background: linear-gradient(90deg, #0b1220, #374151, #6b7280);
+  border-radius: 3px;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.65), 0 0 10px rgba(167, 139, 250, 0.25);
+  border: 1px solid rgba(226, 232, 240, 0.18);
+}
+
+.character-state-3 .gun-handle {
+  width: 30%;
+  height: 80%;
+  background: linear-gradient(135deg, #111827, #6b7280);
+  border-radius: 4px;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.65);
+  border: 1px solid rgba(226, 232, 240, 0.14);
+}
+
+.character-state-3 .gun-muzzle-flash {
+  width: 18px;
+  height: 18px;
+  background: radial-gradient(circle, #fbbf24, rgba(249,115,22,0.55), transparent);
+  border-radius: 50%;
+  position: absolute;
+  right: -8px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.6;
+  animation: muzzleFlash 1.5s ease-in-out infinite;
+}
+
+.character-state-3 .head-face {
+  position: absolute;
+  inset: 20%;
+}
+
+.character-state-3 .eye {
+  width: 6px;
+  height: 6px;
+  background: #ffffff;
+  border-radius: 50%;
+  position: absolute;
+  top: 30%;
+  box-shadow: 0 0 6px rgba(255, 255, 255, 1);
+  animation: eyeBlink 3s ease-in-out infinite;
+}
+
+.character-state-3 .left-eye {
+  left: 25%;
+}
+
+.character-state-3 .right-eye {
+  right: 25%;
+}
+
+.character-state-3 .mouth {
+  width: 10px;
+  height: 5px;
+  border: 2px solid #ffffff;
+  border-top: none;
+  border-radius: 0 0 10px 10px;
+  position: absolute;
+  bottom: 25%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+@keyframes gunIdle {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-3px) rotate(-0.5deg); }
+}
+
+@keyframes headGlow {
+  0%, 100% { box-shadow: 0 4px 16px rgba(139, 92, 246, 0.5); }
+  50% { box-shadow: 0 4px 24px rgba(139, 92, 246, 0.8); }
+}
+
+@keyframes torsoPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+@keyframes armHoldLeft {
+  0%, 100% { transform: rotate(-10deg); }
+  50% { transform: rotate(-8deg); }
+}
+
+@keyframes armHoldRight {
+  0%, 100% { transform: rotate(10deg); }
+  50% { transform: rotate(12deg); }
+}
+
+@keyframes gunAim {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-2px) rotate(-2deg); }
+}
+
+@keyframes muzzleFlash {
+  0%, 100% { opacity: 0.3; transform: translateY(-50%) scale(0.8); }
+  50% { opacity: 0.8; transform: translateY(-50%) scale(1.2); }
+}
+
+@keyframes eyeBlink {
+  0%, 90%, 100% { height: 6px; }
+  95% { height: 1px; }
+}
+
+/* ========================= */
+/* STATE 4 - HEAD + BODY + GUN + BULLET */
+/* ========================= */
+
+.character-state-4 {
+  animation: powerIdle 1.5s ease-in-out infinite;
+}
+
+.character-state-4 .character-head {
+  width: 45%;
+  height: 40%;
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  border-radius: 50%;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(251, 191, 36, 0.7);
+  border: 2px solid rgba(251, 191, 36, 0.9);
+  z-index: 2;
+  animation: headPower 1s ease-in-out infinite;
+}
+
+.character-state-4 .character-body {
+  width: 55%;
+  height: 50%;
+  position: relative;
+  margin-top: -5%;
+  z-index: 1;
+}
+
+.character-state-4 .body-torso {
+  width: 100%;
+  height: 70%;
+  background: linear-gradient(135deg, #f97316, #ea580c);
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(249, 115, 22, 0.6);
+  border: 2px solid rgba(251, 191, 36, 0.8);
+  animation: torsoPower 1.5s ease-in-out infinite;
+}
+
+.character-state-4 .body-arm {
+  width: 25%;
+  height: 50%;
+  background: linear-gradient(135deg, #ea580c, #f97316);
+  border-radius: 4px;
+  position: absolute;
+  top: 10%;
+  box-shadow: 0 2px 10px rgba(249, 115, 22, 0.5);
+}
+
+.character-state-4 .left-arm {
+  left: -15%;
+  transform-origin: top right;
+  animation: armPowerLeft 1.5s ease-in-out infinite;
+}
+
+.character-state-4 .right-arm {
+  right: -15%;
+  transform-origin: top left;
+  animation: armPowerRight 1.5s ease-in-out infinite;
+}
+
+.character-state-4 .character-gun {
+  position: absolute;
+  right: -10%;
+  top: 28%;
+  width: 72%;
+  height: 26%;
+  z-index: 3;
+  animation: gunPower 1s ease-in-out infinite;
+}
+
+.character-state-4 .gun-barrel {
+  width: 70%;
+  height: 46%;
+  background: linear-gradient(90deg, #0b1220, #374151, #94a3b8);
+  border-radius: 3px;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.75), 0 0 18px rgba(251, 191, 36, 0.55);
+  border: 1px solid rgba(226, 232, 240, 0.18);
+}
+
+.character-state-4 .gun-handle {
+  width: 30%;
+  height: 80%;
+  background: linear-gradient(135deg, #111827, #6b7280);
+  border-radius: 4px;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(226, 232, 240, 0.14);
+}
+
+.character-state-4 .gun-muzzle-flash {
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(circle, #fbbf24, #f97316, transparent);
+  border-radius: 50%;
+  position: absolute;
+  right: -10px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.8;
+  animation: muzzlePower 0.8s ease-in-out infinite;
+}
+
+.character-state-4 .character-bullet-indicator {
+  position: absolute;
+  top: -15%;
+  right: -10%;
+  width: 20px;
+  height: 20px;
+  z-index: 4;
+  animation: bulletPulse 1s ease-in-out infinite;
+}
+
+.character-state-4 .bullet-icon {
+  font-size: 12px;
+  filter: drop-shadow(0 0 4px rgba(239, 68, 68, 0.8));
+  animation: bulletSpin 2s linear infinite;
+}
+
+.character-state-4 .power-aura {
+  position: absolute;
+  inset: -10px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(251, 191, 36, 0.3), transparent);
+  animation: auraPulse 1.5s ease-in-out infinite;
+  z-index: -1;
+}
+
+.character-state-4 .head-face {
+  position: absolute;
+  inset: 20%;
+}
+
+.character-state-4 .eye {
+  width: 7px;
+  height: 7px;
+  background: #ffffff;
+  border-radius: 50%;
+  position: absolute;
+  top: 30%;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 1), 0 0 12px rgba(251, 191, 36, 0.8);
+  animation: eyePower 2s ease-in-out infinite;
+}
+
+.character-state-4 .left-eye {
+  left: 25%;
+}
+
+.character-state-4 .right-eye {
+  right: 25%;
+}
+
+.character-state-4 .mouth {
+  width: 12px;
+  height: 6px;
+  border: 2px solid #ffffff;
+  border-top: none;
+  border-radius: 0 0 12px 12px;
+  position: absolute;
+  bottom: 25%;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.8);
+}
+
+@keyframes powerIdle {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  25% { transform: translateY(-4px) rotate(-1deg); }
+  75% { transform: translateY(-4px) rotate(1deg); }
+}
+
+@keyframes headPower {
+  0%, 100% { 
+    box-shadow: 0 4px 20px rgba(251, 191, 36, 0.7);
+    transform: scale(1);
+  }
+  50% { 
+    box-shadow: 0 4px 30px rgba(251, 191, 36, 1);
+    transform: scale(1.08);
+  }
+}
+
+@keyframes torsoPower {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes armPowerLeft {
+  0%, 100% { transform: rotate(-12deg); }
+  50% { transform: rotate(-8deg); }
+}
+
+@keyframes armPowerRight {
+  0%, 100% { transform: rotate(12deg); }
+  50% { transform: rotate(15deg); }
+}
+
+@keyframes gunPower {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-3px) rotate(-3deg); }
+}
+
+@keyframes muzzlePower {
+  0%, 100% { 
+    opacity: 0.6; 
+    transform: translateY(-50%) scale(1);
+  }
+  50% { 
+    opacity: 1; 
+    transform: translateY(-50%) scale(1.5);
+  }
+}
+
+@keyframes bulletPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.3); }
+}
+
+@keyframes bulletSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes auraPulse {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.2); }
+}
+
+@keyframes eyePower {
+  0%, 90%, 100% { height: 7px; }
+  95% { height: 1px; }
+}
+
+/* ========================= */
+/* DEAD STATE */
+/* ========================= */
+
+.character-dead {
+  opacity: 0.72;
+  filter: grayscale(0.65) contrast(0.95);
+  transform: rotate(-6deg) translateY(3px);
+}
+
+.character-dead .character-head {
+  width: 48%;
+  height: 42%;
+  background: linear-gradient(135deg, #334155, #0f172a);
+  border-radius: 50%;
+  position: relative;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.55);
+  border: 2px solid rgba(148, 163, 184, 0.22);
+  z-index: 2;
+}
+
+.character-dead .character-body {
+  width: 56%;
+  height: 52%;
+  position: relative;
+  margin-top: -6%;
+  z-index: 1;
+}
+
+.character-dead .body-torso {
+  width: 100%;
+  height: 70%;
+  background: linear-gradient(135deg, #1f2937, #0b1220);
+  border-radius: 8px;
+  box-shadow: inset 0 0 12px rgba(0,0,0,0.6);
+  border: 2px solid rgba(148, 163, 184, 0.16);
+}
+
+.character-dead .body-arm {
+  width: 24%;
+  height: 50%;
+  background: linear-gradient(135deg, #1f2937, #111827);
+  border-radius: 4px;
+  position: absolute;
+  top: 12%;
+  opacity: 0.8;
+}
+
+.character-dead .left-arm { left: -16%; transform: rotate(-22deg); }
+.character-dead .right-arm { right: -16%; transform: rotate(22deg); }
+
+.character-dead .head-face {
+  position: absolute;
+  inset: 22%;
+}
+
+.character-dead .eye {
+  width: 6px;
+  height: 6px;
+  background: rgba(226, 232, 240, 0.45);
+  border-radius: 50%;
+  position: absolute;
+  top: 30%;
+}
+
+.character-dead .dead-x {
+  background: transparent;
+}
+
+.character-dead .dead-x::before,
+.character-dead .dead-x::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(226, 232, 240, 0.45);
+  border-radius: 2px;
+  transform-origin: center;
+}
+
+.character-dead .dead-x::before { transform: rotate(45deg) scaleX(1.6); height: 2px; top: 2px; }
+.character-dead .dead-x::after { transform: rotate(-45deg) scaleX(1.6); height: 2px; top: 2px; }
+
+.character-dead .dead-mouth {
+  width: 12px;
+  height: 6px;
+  border: 2px solid rgba(226, 232, 240, 0.35);
+  border-top: none;
+  border-radius: 0 0 12px 12px;
+  position: absolute;
+  bottom: 22%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.character-dead .dead-slash {
+  position: absolute;
+  inset: 8%;
+  border-radius: 10px;
+  background: linear-gradient(135deg, transparent 45%, rgba(239, 68, 68, 0.18) 47%, rgba(239, 68, 68, 0.18) 53%, transparent 55%);
+  pointer-events: none;
+  opacity: 0.85;
+}

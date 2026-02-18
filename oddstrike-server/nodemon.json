@@ -1,0 +1,5 @@
+{
+  "watch": ["server.js", "models", "socket", "utils"],
+  "ignore": ["testCreate.js", "testJoin.js", "node_modules"],
+  "ext": "js,json"
+}
