@@ -24,8 +24,12 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: "*",
-    methods: ["GET", "POST"]
+    origin: [
+      "http://localhost:5173",
+      "https://oddstrike-e2f8ebjqf-sumanths-projects-41cf0c.vercel.app"
+    ],
+    methods: ["GET", "POST"],
+    credentials: true
   }
 });
 
