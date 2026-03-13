@@ -1,6 +1,6 @@
-# Dice Soldiers – Multiplayer Turn-Based Strategy Game
+# Oddstrike – Multiplayer Turn-Based Strategy Game
 
-Dice Soldiers is a browser-based multiplayer strategy game where players upgrade their soldiers using dice rolls and compete to eliminate opponents' units.
+OddStrike is a browser-based multiplayer strategy game where players upgrade their soldiers using dice rolls and compete to eliminate opponents' units.
 
 The game supports up to **6 players in a shared room**, where each player controls **5 soldiers**. Players take turns rolling a dice to upgrade their soldiers and strategically eliminate opponents.
 
