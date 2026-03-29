@@ -9,6 +9,8 @@ function Home({ setPage, setRoom }) {
   const [step, setStep] = useState(1);
   const [roomCode, setRoomCode] = useState("");
   const [rulesOpen, setRulesOpen] = useState(false);
+  const [isCreating, setIsCreating] = useState(false);
+  const [isJoining, setIsJoining] = useState(false);
 
   useEffect(() => {
     const savedName = localStorage.getItem("oddstrike_name");
@@ -19,7 +21,6 @@ function Home({ setPage, setRoom }) {
       setStep(2);
     }
 
-    // 🔁 Auto Rejoin if room exists
     if (savedName && savedRoom) {
       socket.emit("rejoinRoom", {
         name: savedName,
@@ -28,18 +29,24 @@ function Home({ setPage, setRoom }) {
     }
 
     socket.on("roomCreated", (room) => {
+      setIsCreating(false);
+      setIsJoining(false);
       localStorage.setItem("oddstrike_room", room.roomCode);
       setRoom({ ...room, myId: socket.id });
       setPage("lobby");
     });
 
     socket.on("roomUpdated", (room) => {
+      setIsCreating(false);
+      setIsJoining(false);
       localStorage.setItem("oddstrike_room", room.roomCode);
       setRoom({ ...room, myId: socket.id });
       setPage("lobby");
     });
 
     socket.on("errorMessage", (msg) => {
+      setIsCreating(false);
+      setIsJoining(false);
       alert(msg);
     });
 
@@ -51,23 +58,37 @@ function Home({ setPage, setRoom }) {
   }, [setPage, setRoom]);
 
   const continueWithName = () => {
-    if (!name.trim()) return alert("Enter your name");
-    localStorage.setItem("oddstrike_name", name);
+    if (!name.trim()) {
+      alert("Enter your name");
+      return;
+    }
+
+    localStorage.setItem("oddstrike_name", name.trim());
     setStep(2);
   };
 
   const createRoom = () => {
-    socket.emit("createRoom", { name });
+    if (isCreating || isJoining) return;
+    setIsCreating(true);
+    socket.emit("createRoom", { name: name.trim() });
   };
 
   const joinRoom = () => {
-    if (!roomCode.trim()) return alert("Enter room code");
+    if (isCreating || isJoining) return;
 
+    if (!roomCode.trim()) {
+      alert("Enter room code");
+      return;
+    }
+
+    setIsJoining(true);
     socket.emit("joinRoom", {
-      name,
+      name: name.trim(),
       roomCode: roomCode.trim().toUpperCase()
     });
   };
+
+  const isPending = isCreating || isJoining;
 
   return (
     <div className="home-container">
@@ -112,69 +133,93 @@ function Home({ setPage, setRoom }) {
             </div>
           </div>
 
-      {/* STEP 1 - ENTER NAME */}
-      {step === 1 && (
-        <div className="home-form">
-          <input
-            className="home-input"
-            placeholder="Enter your name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-          <button className="home-btn primary" onClick={continueWithName}>
-            Continue
-          </button>
-        </div>
-      )}
+          {step === 1 && (
+            <div className="home-form">
+              <input
+                className="home-input"
+                placeholder="Enter your name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    continueWithName();
+                  }
+                }}
+              />
+              <button className="home-btn primary" onClick={continueWithName}>
+                Continue
+              </button>
+            </div>
+          )}
 
-      {/* STEP 2 - CREATE OR JOIN */}
-      {step === 2 && (
-        <div className="home-form">
-          <div style={{ fontWeight: 800, opacity: 0.9 }}>
-            Welcome, {name}{" "}
-            <span
-              onClick={() => setStep(1)}
-              style={{ cursor: "pointer", opacity: 0.7 }}
-              title="Edit name"
-            >
-              ✏️
-            </span>
-          </div>
-          <div className="home-row">
-            <button className="home-btn primary" onClick={createRoom}>
-              Create Room
-            </button>
-            <button className="home-btn" onClick={() => setStep(3)}>
-              Join Room
-            </button>
-          </div>
-        </div>
-      )}
+          {step === 2 && (
+            <div className="home-form">
+              <div style={{ fontWeight: 800, opacity: 0.9 }}>
+                Welcome, {name}
+                <span
+                  onClick={() => setStep(1)}
+                  style={{ cursor: "pointer", opacity: 0.7, marginLeft: 8 }}
+                  title="Edit name"
+                >
+                  Edit
+                </span>
+              </div>
+              <div className="home-row">
+                <button className="home-btn primary" onClick={createRoom} disabled={isPending}>
+                  {isCreating ? "Creating..." : "Create Room"}
+                </button>
+                <button className="home-btn" onClick={() => setStep(3)} disabled={isPending}>
+                  Join Room
+                </button>
+              </div>
+            </div>
+          )}
 
-      {/* STEP 3 - JOIN ROOM */}
-      {step === 3 && (
-        <div className="home-form">
-          <div style={{ fontWeight: 900, fontSize: 18 }}>Join Room</div>
-          <input
-            className="home-input"
-            placeholder="Enter room code"
-            value={roomCode}
-            onChange={(e) => setRoomCode(e.target.value.toUpperCase())}
-          />
-          <div className="home-row">
-            <button className="home-btn primary" onClick={joinRoom}>
-              Join
-            </button>
-            <button className="home-btn ghost" onClick={() => setStep(2)}>
-              Back
-            </button>
-          </div>
-        </div>
-      )}
+          {step === 3 && (
+            <div className="home-form">
+              <div style={{ fontWeight: 900, fontSize: 18 }}>Join Room</div>
+              <input
+                className="home-input"
+                placeholder="Enter room code"
+                value={roomCode}
+                onChange={(e) => setRoomCode(e.target.value.toUpperCase())}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    joinRoom();
+                  }
+                }}
+              />
+              <div className="home-row">
+                <button className="home-btn primary" onClick={joinRoom} disabled={isPending}>
+                  {isJoining ? "Joining..." : "Join"}
+                </button>
+                <button className="home-btn ghost" onClick={() => setStep(2)} disabled={isPending}>
+                  Back
+                </button>
+              </div>
+            </div>
+          )}
         </div>
 
         <RulesModal open={rulesOpen} onClose={() => setRulesOpen(false)} />
       </div>
+
+      {isPending && (
+        <div className="warmup-overlay">
+          <div className="warmup-card">
+            <h3 className="warmup-title">Connecting to Arena...</h3>
+            <div className="warmup-stage">
+              <div className="warmup-actor warmup-actor-one" />
+              <div className="warmup-actor warmup-actor-two" />
+              <div className="warmup-shot" />
+            </div>
+            <p className="warmup-subtitle">
+              {isCreating ? "Room is getting created" : "Joining room"}.
+              If server is waking up, this can take a few seconds.
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
