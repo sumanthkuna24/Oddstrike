@@ -128,6 +128,12 @@
   border-color: rgba(59,130,246,0.45);
 }
 
+.home-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
 .home-btn.primary {
   background: linear-gradient(135deg, #22c55e, #16a34a);
   border: none;
@@ -163,3 +169,99 @@
   .home-showcase-icon { width: 76px; height: 76px; }
 }
 
+.warmup-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 4000;
+  background: rgba(2, 6, 23, 0.82);
+  backdrop-filter: blur(8px);
+  display: grid;
+  place-items: center;
+  padding: 16px;
+}
+
+.warmup-card {
+  width: min(560px, 100%);
+  border-radius: 18px;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  background: rgba(15, 23, 42, 0.85);
+  box-shadow: 0 0 30px rgba(2, 6, 23, 0.6);
+  padding: 20px;
+  text-align: center;
+}
+
+.warmup-title {
+  margin: 0 0 14px;
+  font-size: clamp(20px, 4vw, 28px);
+}
+
+.warmup-subtitle {
+  margin: 14px 0 0;
+  color: rgba(226, 232, 240, 0.9);
+  font-weight: 700;
+}
+
+.warmup-stage {
+  position: relative;
+  height: 120px;
+  border-radius: 14px;
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(30, 41, 59, 0.95), rgba(2, 6, 23, 0.9));
+  border: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.warmup-actor {
+  position: absolute;
+  bottom: 16px;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: radial-gradient(circle at 30% 30%, #fbbf24, #f97316);
+}
+
+.warmup-actor-one {
+  left: 12%;
+  animation: actorWalkOne 2.2s ease-in-out infinite;
+}
+
+.warmup-actor-two {
+  right: 14%;
+  background: radial-gradient(circle at 30% 30%, #60a5fa, #1d4ed8);
+  animation: actorWalkTwo 2.2s ease-in-out infinite;
+}
+
+.warmup-shot {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #fbbf24;
+  box-shadow: 0 0 12px rgba(251, 191, 36, 0.9);
+  animation: shotMove 0.75s linear infinite;
+}
+
+@keyframes actorWalkOne {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(120px); }
+}
+
+@keyframes actorWalkTwo {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(-120px); }
+}
+
+@keyframes shotMove {
+  0% {
+    opacity: 0;
+    transform: translateX(-100px) scale(0.8);
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(100px) scale(1.2);
+  }
+}

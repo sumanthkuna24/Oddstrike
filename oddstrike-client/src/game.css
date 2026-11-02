@@ -28,6 +28,37 @@
   border-radius: 12px;
   margin-bottom: 14px;
   flex-shrink: 0;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.turn-timer {
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  background: rgba(15, 23, 42, 0.9);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.turn-timer.urgent {
+  border-color: rgba(248, 113, 113, 0.8);
+  color: #fca5a5;
+  box-shadow: 0 0 10px rgba(248, 113, 113, 0.45);
+}
+
+.rotate-hint {
+  position: fixed;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3200;
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 800;
+  background: rgba(248, 113, 113, 0.15);
+  border: 1px solid rgba(248, 113, 113, 0.5);
 }
 
 .rules-btn {
@@ -169,12 +200,26 @@
 @media (max-width: 520px) {
   .game-container { padding: 12px; }
   .game-header { font-size: 14px; padding: 10px 12px; gap: 10px; flex-wrap: wrap; }
-  .players-grid { gap: 10px; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); }
+  .players-grid { gap: 10px; grid-template-columns: 1fr; }
   .player-card { padding: 10px; }
-  .slot-container { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .slot-container { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; }
   .slot { border-radius: 10px; }
   .slot-number { font-size: 9px; }
   .slot-state-label { font-size: 8px; }
+}
+
+@media (max-width: 900px) and (orientation: portrait) {
+  .players-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .player-card {
+    min-height: auto;
+  }
+
+  .slot {
+    min-width: 0;
+  }
 }
 
 /* ========================= */
@@ -407,7 +452,10 @@
 }
 
 .winner-crown {
-  font-size: 80px;
+  font-size: 36px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   animation: crownFloat 2s ease-in-out infinite;
   margin-bottom: 20px;
 }

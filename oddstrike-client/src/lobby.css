@@ -1,0 +1,288 @@
+.lobby-page {
+  min-height: 100vh;
+  color: #fff;
+  background:
+    radial-gradient(circle at 10% 10%, rgba(34, 197, 94, 0.14), transparent 30%),
+    radial-gradient(circle at 85% 20%, rgba(59, 130, 246, 0.2), transparent 35%),
+    #0f172a;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.lobby-rules-btn {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  z-index: 10;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  background: rgba(2, 6, 23, 0.5);
+  color: #fff;
+  cursor: pointer;
+}
+
+.lobby-shell {
+  width: min(1100px, 100%);
+  margin: 56px auto 0;
+  display: grid;
+  gap: 16px;
+}
+
+.lobby-shell.settings-open {
+  grid-template-columns: 1.3fr 1fr;
+}
+
+.lobby-shell.settings-closed {
+  grid-template-columns: 1fr;
+}
+
+.lobby-main-card,
+.lobby-settings-card {
+  border-radius: 16px;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  background: rgba(15, 23, 42, 0.74);
+  box-shadow: 0 0 30px rgba(2, 6, 23, 0.4);
+  padding: 16px;
+}
+
+.lobby-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.lobby-header h2 {
+  margin: 0;
+}
+
+.lobby-header p {
+  margin: 8px 0 0;
+  color: rgba(226, 232, 240, 0.9);
+}
+
+.lobby-chip {
+  padding: 7px 10px;
+  border-radius: 999px;
+  background: rgba(59, 130, 246, 0.15);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  font-weight: 800;
+  font-size: 12px;
+}
+
+.lobby-toast {
+  margin-top: 12px;
+  padding: 10px;
+  border-radius: 10px;
+  background: rgba(2, 132, 199, 0.14);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  font-weight: 700;
+}
+
+.lobby-player-list {
+  margin-top: 14px;
+  display: grid;
+  gap: 8px;
+}
+
+.lobby-player-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 10px;
+  padding: 10px 12px;
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  background: rgba(2, 6, 23, 0.5);
+}
+
+.lobby-player-name {
+  font-weight: 800;
+}
+
+.lobby-host-tag {
+  margin-left: 8px;
+  color: #fbbf24;
+  font-weight: 800;
+}
+
+.lobby-ready-tag {
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 900;
+  background: rgba(34, 197, 94, 0.16);
+  border: 1px solid rgba(34, 197, 94, 0.4);
+}
+
+.lobby-status {
+  margin-top: 12px;
+  color: rgba(191, 219, 254, 0.95);
+  font-weight: 700;
+}
+
+.lobby-actions {
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.lobby-wait {
+  opacity: 0.8;
+  font-weight: 700;
+}
+
+.lobby-btn {
+  padding: 10px 14px;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  border-radius: 10px;
+  cursor: pointer;
+  background: rgba(59, 130, 246, 0.15);
+  color: #fff;
+  font-weight: 800;
+}
+
+.lobby-btn.primary {
+  border: none;
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+}
+
+.lobby-btn.ghost {
+  background: transparent;
+}
+
+.lobby-btn.danger {
+  background: transparent;
+  border-color: rgba(248, 113, 113, 0.8);
+  color: #fca5a5;
+}
+
+.lobby-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.lobby-settings-card h3 {
+  margin: 0 0 8px;
+}
+
+.lobby-settings-actions {
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.lobby-info-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  background: rgba(15, 23, 42, 0.85);
+  color: #fff;
+  cursor: pointer;
+  font-weight: 900;
+}
+
+.lobby-settings-subtitle {
+  margin: 0 0 12px;
+  color: rgba(226, 232, 240, 0.85);
+  font-size: 14px;
+}
+
+.lobby-settings-footer {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.lobby-settings-current {
+  font-size: 12px;
+  font-weight: 700;
+  color: rgba(226, 232, 240, 0.9);
+}
+
+.lobby-setting-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.16);
+  font-weight: 700;
+}
+
+.lobby-setting-row:last-child {
+  border-bottom: none;
+}
+
+.lobby-setting-row select {
+  min-width: 100px;
+  padding: 7px 8px;
+  border-radius: 8px;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  background: rgba(2, 6, 23, 0.8);
+  color: #fff;
+}
+
+.lobby-footer {
+  width: min(1100px, 100%);
+  margin: 14px auto 0;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.lobby-info-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(2, 6, 23, 0.78);
+  z-index: 2200;
+  display: grid;
+  place-items: center;
+  padding: 14px;
+}
+
+.lobby-info-content {
+  width: min(520px, 100%);
+  border-radius: 14px;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  background: rgba(15, 23, 42, 0.94);
+  padding: 14px;
+}
+
+.lobby-info-content h4 {
+  margin: 0 0 10px;
+}
+
+.lobby-info-content p {
+  margin: 8px 0;
+  color: rgba(226, 232, 240, 0.9);
+}
+
+@media (max-width: 860px) {
+  .lobby-shell {
+    margin-top: 48px;
+    grid-template-columns: 1fr;
+  }
+
+  .lobby-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .lobby-settings-footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .lobby-footer {
+    justify-content: stretch;
+  }
+
+  .lobby-footer .lobby-btn {
+    width: 100%;
+  }
+}

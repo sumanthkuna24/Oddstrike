@@ -40,6 +40,33 @@ const RoomSchema = new mongoose.Schema({
     type: [String],
     default: []
   },
+  turnPhase: {
+    type: String,
+    enum: ["roll", "kill", null],
+    default: null
+  },
+  turnDeadlineAt: {
+    type: Date,
+    default: null
+  },
+  settings: {
+    autoRollEnabled: {
+      type: Boolean,
+      default: false
+    },
+    autoRollTimeoutSec: {
+      type: Number,
+      default: 60
+    },
+    autoKillEnabled: {
+      type: Boolean,
+      default: false
+    },
+    killDecisionTimeoutSec: {
+      type: Number,
+      default: 180
+    }
+  },
   players: [PlayerSchema],
   createdAt: {
     type: Date,
